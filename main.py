@@ -1,5 +1,4 @@
 from flask import Flask
-from test import GetEvent
 import os
 
 app = Flask(__name__)
