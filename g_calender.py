@@ -9,7 +9,7 @@ class CalenderClass(object):
     def __init__(self):
         self.SCOPES = ['https://www.googleapis.com/auth/calendar']
         self.calendar_id = 'yamagashin6142@gmail.com'
-        self.gapi_creds = google.auth.load_credentials_from_file('credentials.json', self.SCOPES)[0]
+        self.gapi_creds = google.auth.load_credentials_from_file('google_credentials.json', self.SCOPES)[0]
         self.service = googleapiclient.discovery.build('calendar', 'v3', credentials=self.gapi_creds)
 
 class GetEvent(CalenderClass):
