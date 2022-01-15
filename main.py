@@ -1,12 +1,21 @@
 from flask import Flask
 import os
+import json
+import googleapiclient.discovery
+import google.auth
+
+from g_calender import GetEvent
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    json = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-    return json
+    obj = GetEvent()
+    result = GetEvent.get_event()
+    return result
 
+
+
+    
 if __name__ == '__main__':
     app.run()
