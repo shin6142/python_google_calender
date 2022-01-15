@@ -1,37 +1,32 @@
+import json
+import os
 import datetime, re
 import googleapiclient.discovery
 import google.auth
 
+credentials = {
+                "type": "service_account",
+                "project_id": os.environ['PROJECT_ID'],
+                "private_key_id": os.environ['PRIVATE_KEY_ID'],
+                "private_key": os.environ['PRIVATE_KEY'],
+                "client_email": os.environ['CLIENT_EMAIL'],
+                "client_id": os.environ['CLIENT_ID'],
+                "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+                "token_uri": "https://oauth2.googleapis.com/token",
+                "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+                "client_x509_cert_url":  os.environ['CLIENT_X509_CERT_URL']
+             }
+
 
 class CalenderClass(object):
     def __init__(self):
+        with open('credentials.json', 'w') as credentials_json:
+            json.dump(credentials, credentials_json)
+
         self.SCOPES = ['https://www.googleapis.com/auth/calendar']
         self.calendar_id = 'yamagashin6142@gmail.com'
         self.gapi_creds = google.auth.load_credentials_from_file('credentials.json', self.SCOPES)[0]
         self.service = googleapiclient.discovery.build('calendar', 'v3', credentials=self.gapi_creds)
-
-
-
-class InsertEvent(CalenderClass):
-    def insert_event(self):
-    # 追加するスケジュールの情報を設定
-        event= {
-            'summary': 'テスト02',
-            'description': '説明テスト説明テスト説明テスト説明テスト説明テスト説明テスト説明テスト説明テスト説明テスト',
-            # 予定の開始時刻(ISOフォーマットで指定)
-            'start': {
-                'dateTime': datetime.datetime(2022, 1, 31, 0, 00).isoformat(),
-                'timeZone': 'Japan'
-            },
-            # 予定の終了時刻(ISOフォーマットで指定)
-            'end': {
-                'dateTime': datetime.datetime(2022, 1, 31, 17, 59).isoformat(),
-                'timeZone': 'Japan'
-            },
-        }
-        # 予定を追加する
-        self.service.events().insert(calendarId = self.calendar_id, body = event).execute()
-
 
 class GetEvent(CalenderClass):
     def get_event(self):

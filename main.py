@@ -1,5 +1,5 @@
 from flask import Flask
-from g_calender_api import GetEvent
+from test import GetEvent
 
 app = Flask(__name__)
 
