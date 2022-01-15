@@ -17,7 +17,7 @@ class CalenderClass(object):
     def __init__(self):
         def _google_creds_as_file():
             temp = tempfile.NamedTemporaryFile()
-            temp.write(json.dumps(GOOGLE_CREDENTIALS))
+            temp.write(json.dumps([b'{GOOGLE_CREDENTIALS}']))
             temp.flush()
             return temp
 
