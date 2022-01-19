@@ -14,7 +14,7 @@ class CalenderClass(object):
             creds_encode_data = json.dumps(GOOGLE_CREDENTIALS, indent=2).encode('utf-8')
 
             with tempfile.NamedTemporaryFile(delete=False, suffix='.json') as t:
-                with open(t.name, 'w++') as temp_json:
+                with open(t.name, 'w+') as temp_json:
                     temp_json.write(creds_encode_data)
             return temp_json
 
