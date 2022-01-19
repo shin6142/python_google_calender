@@ -13,7 +13,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     obj = GetEvent()
-    result = GetEvent.get_event()
+    result = obj.get_event()
     return result
 
 
