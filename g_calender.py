@@ -11,10 +11,9 @@ CALENDAR_ID = os.environ['CALENDAR_ID']
 class CalenderClass(object):
     def __init__(self):
         def _google_creds_as_file():
-            temp = tempfile.NamedTemporaryFile(suffix='.json')
-            temp.write(GOOGLE_CREDENTIALS)
-            temp.flush()
-            return temp
+            with tempfile.NamedTemporaryFile(delete=False, suffix='.json') as temp_json:
+                temp_json.write(str(GOOGLE_CREDENTIALS))
+            return temp_json
 
         self.creds_file = _google_creds_as_file()
         self.SCOPES = ['https://www.googleapis.com/auth/calendar']
