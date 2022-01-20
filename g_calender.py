@@ -15,7 +15,7 @@ class CalenderClass(object):
 
             with tempfile.NamedTemporaryFile(delete=False, suffix='.json') as t:
                 with open(t.name, 'w+') as temp_json:
-                    temp_json.write(creds_encode_data)
+                    temp_json.write(str(creds_encode_data))
             return temp_json
 
         self.creds_file = _google_creds_as_file()
