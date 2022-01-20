@@ -10,18 +10,17 @@ CALENDAR_ID = os.environ['CALENDAR_ID']
 
 class CalenderClass(object):
     def __init__(self):
-        def _google_creds_as_file():
-            creds_encode_data = json.dumps(GOOGLE_CREDENTIALS, indent=2)
+        # def _google_creds_as_file():
+        creds_encode_data = json.dumps(GOOGLE_CREDENTIALS, indent=2)
 
-            with tempfile.NamedTemporaryFile(delete=False, suffix='.json') as t:
-                with open(t.name, 'w+') as temp_json:
-                    temp_json.write(creds_encode_data)
-            return temp_json
-
-        self.creds_file = _google_creds_as_file()
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.json') as t:
+            with open(t.name, 'w+') as temp_json:
+                temp_json.write(creds_encode_data)
+        # return temp_json
+        # self.creds_file = _google_creds_as_file()
         self.SCOPES = ['https://www.googleapis.com/auth/calendar']
         self.calendar_id = CALENDAR_ID
-        self.gapi_creds = google.auth.load_credentials_from_file(str(self.creds_file), self.SCOPES)[0]
+        self.gapi_creds = google.auth.load_credentials_from_file(str(temp_json), self.SCOPES)[0]
         self.service = googleapiclient.discovery.build('calendar', 'v3', credentials=self.gapi_creds)
 
 
