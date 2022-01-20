@@ -21,7 +21,7 @@ class CalenderClass(object):
         self.creds_file = _google_creds_as_file()
         self.SCOPES = ['https://www.googleapis.com/auth/calendar']
         self.calendar_id = CALENDAR_ID
-        self.gapi_creds = google.auth.load_credentials_from_file(self.creds_file, self.SCOPES)[0]
+        self.gapi_creds = google.auth.load_credentials_from_file(str(self.creds_file), self.SCOPES)[0]
         self.service = googleapiclient.discovery.build('calendar', 'v3', credentials=self.gapi_creds)
 
 
